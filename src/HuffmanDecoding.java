@@ -93,7 +93,7 @@ public class HuffmanDecoding {
 
         // loop until there is only one tree left
         while (trees.size() > 1) {
-            // two trees with least frequency
+            // two trees with the least frequency
             Node a = trees.poll();
             Node b = trees.poll();
 
