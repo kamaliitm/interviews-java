@@ -49,6 +49,39 @@ public class LargestRectangle {
         return maxArea;
     }
 
+    // rewriting the same above function for practice
+    public int largestRectangleArea(int[] heights) {
+        if (heights == null || heights.length == 0) {
+            return 0;
+        }
+
+        Stack<Rectangle> incrementalHeightStack = new Stack<>();
+        int maxArea = 0;
+
+        for (int i=0; i < heights.length; i++) {
+            if (incrementalHeightStack.isEmpty()) {
+                incrementalHeightStack.add(new Rectangle(i, heights[i]));
+                continue;
+            }
+
+            int startIndex = i;
+            while (!incrementalHeightStack.isEmpty() && incrementalHeightStack.peek().height > heights[i]) {
+                Rectangle rect = incrementalHeightStack.pop();
+                maxArea = Math.max(maxArea, rect.height * (i-rect.startIndex));
+                startIndex = rect.startIndex;
+            }
+
+            incrementalHeightStack.add(new Rectangle(startIndex, heights[i]));
+        }
+
+        while (!incrementalHeightStack.isEmpty()) {
+            Rectangle rect = incrementalHeightStack.pop();
+            maxArea = Math.max(maxArea, rect.height * (heights.length - rect.startIndex));
+        }
+
+        return maxArea;
+    }
+
     public static void main(String []args) {
 //        long maxArea = largestRectangle(Arrays.asList(1, 2, 3, 4, 5));
         long maxArea = largestRectangle(Arrays.asList(2, 1, 5, 6, 2, 3));
