@@ -1,20 +1,20 @@
 import java.util.*;
 
-abstract class Node implements Comparable<Node> {
+abstract class Node2 implements Comparable<Node2> {
     public  int frequency; // the frequency of this tree
     public  char data;
-    public  Node left, right;
-    public Node(int freq) {
+    public Node2 left, right;
+    public Node2(int freq) {
         frequency = freq;
     }
 
     // compares on the frequency
-    public int compareTo(Node tree) {
+    public int compareTo(Node2 tree) {
         return frequency - tree.frequency;
     }
 }
 
-class HuffmanLeaf extends Node {
+class HuffmanLeaf extends Node2 {
 
 
     public HuffmanLeaf(int freq, char val) {
@@ -23,9 +23,9 @@ class HuffmanLeaf extends Node {
     }
 }
 
-class HuffmanNode extends Node {
+class HuffmanNode extends Node2 {
 
-    public HuffmanNode(Node l, Node r) {
+    public HuffmanNode(Node2 l, Node2 r) {
         super(l.frequency + r.frequency);
         left = l;
         right = r;
@@ -44,9 +44,9 @@ class Decoding {
     
 */
 
-    void decode(String s, Node root) {
+    void decode(String s, Node2 root) {
 
-        Node curr = root;
+        Node2 curr = root;
         if (curr == null) {
             System.out.println();
         }
@@ -79,9 +79,9 @@ class Decoding {
 public class HuffmanDecoding {
 
     // input is an array of frequencies, indexed by character code
-    public static Node buildTree(int[] charFreqs) {
+    public static Node2 buildTree(int[] charFreqs) {
 
-        PriorityQueue<Node> trees = new PriorityQueue<Node>();
+        PriorityQueue<Node2> trees = new PriorityQueue<Node2>();
         // initially, we have a forest of leaves
         // one for each non-empty character
         for (int i = 0; i < charFreqs.length; i++)
@@ -94,8 +94,8 @@ public class HuffmanDecoding {
         // loop until there is only one tree left
         while (trees.size() > 1) {
             // two trees with the least frequency
-            Node a = trees.poll();
-            Node b = trees.poll();
+            Node2 a = trees.poll();
+            Node2 b = trees.poll();
 
             // put into new node and re-insert into queue
             trees.offer(new HuffmanNode(a, b));
@@ -106,7 +106,7 @@ public class HuffmanDecoding {
 
     public static Map<Character,String> mapA=new HashMap<Character ,String>();
 
-    public static void printCodes(Node tree, StringBuffer prefix) {
+    public static void printCodes(Node2 tree, StringBuffer prefix) {
 
         assert tree != null;
 
@@ -146,7 +146,7 @@ public class HuffmanDecoding {
             charFreqs[c]++;
 
         // build tree
-        Node tree = buildTree(charFreqs);
+        Node2 tree = buildTree(charFreqs);
 
         // print out results
         printCodes(tree, new StringBuffer());
