@@ -1,6 +1,2 @@
-<<<<<<< HEAD
-.idea
-*/**/*.class
-=======
-out
->>>>>>> 5daa8a33adf71da63cda49b76e769216b3d62a1a
+.idea/
+out/
